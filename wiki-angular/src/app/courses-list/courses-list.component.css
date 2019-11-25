@@ -1,0 +1,14 @@
+.container{
+    border-bottom: 2px solid black;
+}
+.row{
+    padding: 30px;
+}
+
+.zebra:nth-child(even) {
+    background-color: #929292;
+}
+
+.zebra:nth-child(odd) {
+    background-color: #c8c8c8;
+}

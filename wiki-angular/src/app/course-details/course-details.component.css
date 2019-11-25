@@ -1,0 +1,21 @@
+.course-icon{
+    width: 100%;
+    object-fit: contain;
+    padding: 10px;
+}
+
+.teacher-information{
+    padding: 20px;
+}
+
+.card-body{
+    width: 100%;
+}
+
+.table{
+    table-layout: fixed;
+}
+
+.btn{
+    cursor: pointer;
+}

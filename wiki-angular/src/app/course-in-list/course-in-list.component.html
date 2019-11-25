@@ -1,0 +1,33 @@
+<div class="text-center com">
+    <div class="card h-100">
+            <img class="course-icon" [src]="course.image">
+    <div class="card-body">
+        <h2 class="card-title">
+            {{ course.name }}
+        </h2>
+       <table class="table table-striped">
+            <tbody>
+                <tr>
+                    <td>ECTS:</td>
+                    <td>{{course.ects}}</td>
+                </tr>
+                <tr>
+                    <td>Semester:</td>
+                    <td>{{course.semester}}</td>
+                </tr>
+                <tr>
+                    <td>Liczba Komentarzy:</td>
+                    <td>{{courseComments()}}</td>
+                </tr>
+            </tbody>
+        </table>
+        {{courseRating()}}
+        <br><br>
+        <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small><br>
+        </div>
+        <div class="card-footer">
+        <button type="button" class="btn btn-dark" [routerLink]="['/courses', course.name]" [queryParams]="{ id: course.id}">Więcej!</button>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,119 @@
+<app-topnav></app-topnav>
+<div class="container" *ngIf="course">
+
+    <div class="row">
+
+       <div class="col-lg-4">
+          <div class="teacher-information text-center card mt-4">
+            <h2>{{selectValue.teacher.name}}</h2>
+            <img class="course-icon" [src]="selectValue.teacher.image">
+            <label>Wybierz nauczyciela:</label>
+            <select (change)="selectValue = ( $event.target.value && course.courseTeachers[ +$event.target.value ] || null );" (change)="changeCategory()">
+                <ng-template ngFor let-courseTeacher [ngForOf]="course.courseTeachers" let-index="index">
+                    <option [value]="index" [selected]="( selectValue === courseTeacher )">
+                        {{ courseTeacher.teacher.name }}
+                    </option>
+                </ng-template>
+            </select>
+            <div class="card-body">
+              <table class="table table-striped">
+                    <tbody>
+                        <tr>
+                            <td>Stopień:</td>
+                            <td>{{selectValue.teacher.degree}}</td>
+                        </tr>
+                        <tr>
+                            <td>Tel:</td>
+                            <td>{{selectValue.teacher.teacherCard.phone}}</td>
+                        </tr>
+                        <tr>
+                            <td>email:</td>
+                            <td>{{selectValue.teacher.teacherCard.email}}</td>
+                        </tr>
+                        <tr>
+                            <td>website:</td>
+                            <td>{{selectValue.teacher.teacherCard.homePage}}</td>
+                        </tr>
+                        <tr>
+                            <td>Ocena ogólna:</td>
+                            <td>{{teacherOverallRating()}}</td>
+                        </tr>
+                        <tr>
+                            <td>Ocena kategori {{selectCategory.category}}:</td>
+                            <td>{{teacherCategoryRating()}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+              </div>
+                <label>Wybierz kategorie:</label>
+                <select (change)="selectCategory = ( $event.target.value && selectValue.commentCategories[ +$event.target.value ] || null );">
+                    <ng-template ngFor let-commentCategory [ngForOf]="selectValue.commentCategories" let-index="index">
+                        <option [value]="index" [selected]="( selectCategory === commentCategory )">
+                            {{ commentCategory.category }}
+                        </option>
+                    </ng-template>
+                </select>
+        </div>
+      </div>
+        <!-- /.col-lg-3 -->
+
+      <div class="col-lg-8">
+
+        <div class="card mt-4 text-center">
+            <img class="course-icon" [src]="course.image" >
+          <div class="card-body">
+            <h3 class="card-title">{{course.name}}</h3>
+            <table class="table table-striped">
+                <tbody>
+                  <tr>
+                    <td>ECTS:</td>
+                    <td>{{course.ects}}</td>
+                  </tr>
+                  <tr>
+                      <td>Semester:</td>
+                      <td>{{course.semester}}</td>
+                  </tr>
+                  <tr>
+                      <td>Typ Kursu:</td>
+                      <td>{{course.courseForm}}</td>
+                  </tr>
+                  <tr>
+                      <td>Max Students:</td>
+                      <td>{{course.maxStudents}}</td>
+                  </tr>
+                  <tr>
+                      <td>Ocena Kursu:</td>
+                      <td> <span class="text-warning">&#9733; &#9733; &#9733; &#9733; &#9734;</span>
+                           {{courseRating()}}
+                      </td>
+                  </tr>   
+                </tbody>
+              </table>
+            <p class="card-text">{{course.description}}</p>
+            <a  class="btn btn-success text-white" (click)="toggleChild()">Oceń Kurs</a>
+            <app-rate-course [showMePartially]="showVar" [kurs] = "course"></app-rate-course>
+          </div>
+        </div>
+        <!-- /.card -->
+      </div>
+      <div class="col-lg-12">
+        <div class="card card-outline-secondary my-4">
+            <div class="card-header">
+              Oceny Nauczyciela w kategorii {{selectCategory.category}}:
+            </div>
+            <div class="card-body">
+                <ng-template ngFor let-comment [ngForOf]="selectCategory.comments">
+                  <p>{{comment.content}}</p>
+                  <p>Ocena: {{comment.rating}}</p>
+                  <small class="text-muted">Posted by {{comment.studentId}}</small>
+                  <hr>
+              </ng-template>
+              <a href="#" class="btn btn-success">Leave a Review</a>
+            </div>
+          </div>
+      </div>
+</div>
+</div>
+
+  
+

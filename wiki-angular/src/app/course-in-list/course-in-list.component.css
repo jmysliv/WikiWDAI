@@ -1,0 +1,17 @@
+.com{
+    margin: none;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+.row{
+    border-top: 2px solid black;
+}
+
+
+
+.course-icon{
+    height: 100%;
+}
