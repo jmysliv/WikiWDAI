@@ -9,7 +9,9 @@ import { CourseDetailsComponent } from './course-details/course-details.componen
 import { HomePageComponent } from './home-page/home-page.component';
 import { HttpClientModule } from '@angular/common/http';
 import { RateCourseComponent } from './rate-course/rate-course.component';
-
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { AddCommentComponent } from './add-comment/add-comment.component';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -20,12 +22,15 @@ import { RateCourseComponent } from './rate-course/rate-course.component';
       CourseInListComponent,
       CourseDetailsComponent,
       HomePageComponent,
-      RateCourseComponent
+      RateCourseComponent,
+      AddCommentComponent
    ],
    imports: [
       BrowserModule,
       AppRoutingModule,
-      HttpClientModule
+      HttpClientModule,
+      NgbModule,
+      FormsModule
    ],
    providers: [],
    bootstrap: [

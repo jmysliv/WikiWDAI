@@ -108,7 +108,8 @@
                   <small class="text-muted">Posted by {{comment.studentId}}</small>
                   <hr>
               </ng-template>
-              <a href="#" class="btn btn-success">Leave a Review</a>
+              <a  class="btn btn-success text-white" (click)="toggleChild2()">Oceń Nauczyciela!</a>
+              <app-add-comment [showMe]="showCommentForm" [course]="course" [courseTeacher]="selectValue" [commentCategory]="selectCategory"></app-add-comment>
             </div>
           </div>
       </div>

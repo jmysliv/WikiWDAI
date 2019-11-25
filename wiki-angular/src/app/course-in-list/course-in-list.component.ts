@@ -1,5 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Course } from '../course';
+import { Course } from './../course';
+import { Component, OnInit, Input, Output, EventEmitter  } from '@angular/core';
+
 
 @Component({
   selector: 'app-course-in-list',
@@ -8,8 +9,9 @@ import { Course } from '../course';
 })
 export class CourseInListComponent implements OnInit {
 
+  // tslint:disable-next-line:no-input-rename
   @Input('kurs') course: Course;
-
+  @Output() removeCourse = new EventEmitter<Course> ();
   constructor() {
   }
 
@@ -33,6 +35,10 @@ export class CourseInListComponent implements OnInit {
       });
     });
     return sum;
+  }
+
+  deleteCourse() {
+    this.removeCourse.emit(this.course);
   }
 
   ngOnInit() {

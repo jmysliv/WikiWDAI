@@ -27,6 +27,7 @@
         </div>
         <div class="card-footer">
         <button type="button" class="btn btn-dark" [routerLink]="['/courses', course.name]" [queryParams]="{ id: course.id}">Więcej!</button>
+        <a id="closebtn" class="closebtn" (click)="deleteCourse()">&times;</a>
         </div>
     </div>
 </div>

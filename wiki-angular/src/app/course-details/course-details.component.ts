@@ -19,7 +19,8 @@ param1: string;
 course: Course;
 public selectValue: CourseTeacher;
 public selectCategory: Section;
-showVar = true;
+showVar = false;
+showCommentForm = false;
 
 constructor(private route: ActivatedRoute, private mockData: MockDataServiceService) {
 }
@@ -73,4 +74,8 @@ constructor(private route: ActivatedRoute, private mockData: MockDataServiceServ
   toggleChild() {
     this.showVar = !this.showVar;
 }
+
+  toggleChild2() {
+    this.showCommentForm = !this.showCommentForm;
+  }
 }

@@ -9,9 +9,21 @@
 .row{
     border-top: 2px solid black;
 }
-
-
-
 .course-icon{
     height: 100%;
 }
+
+.closebtn:hover {
+    color: #f1f1f1;
+  }
+  
+.closebtn {
+    padding: 8px 8px 8px 10px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+    font-size: 36px; 
+    cursor: pointer;
+  }

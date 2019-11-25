@@ -1,3 +1,5 @@
 <div class="container" *ngIf="showMePartially">
-      <a  class="btn btn-secondary text-white" (click)="toggleChild()">Zapisz</a>
+    <ngb-rating [(rate)]="currentRate"></ngb-rating>
+    <hr>
+    <a  class="btn btn-secondary text-white" (click)="addRate()">Zapisz</a>
 </div>
