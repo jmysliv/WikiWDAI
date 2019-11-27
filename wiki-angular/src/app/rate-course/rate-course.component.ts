@@ -1,3 +1,4 @@
+import { RatingValues } from './../ratings';
 import { MockDataServiceService } from './../mock-data-service.service';
 import { Course } from './../course';
 import { Component, OnInit, Input } from '@angular/core';
@@ -26,8 +27,14 @@ export class RateCourseComponent implements OnInit {
   }
 
   addRate() {
-    this.mockData.addRating(this.currentRate, 'test', this.course.id);
+    const rating = {
+      rating: this.currentRate,
+      studentId: 'seba'
+    };
+    this.course.ratings.push(rating);
+    this.mockData.addRating(this.course, this.course.id);
     this.showMePartially = false;
+    console.log(this.course);
   }
 
 }

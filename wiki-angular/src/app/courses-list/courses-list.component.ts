@@ -18,7 +18,7 @@ export class CoursesListComponent implements OnInit {
   }
 
   removeCourse(course: Course) {
-    this.mockData.deleteHero(course).subscribe(res => {});
+    this.mockData.deleteCourse(course).subscribe(res => {});
   }
 
 }

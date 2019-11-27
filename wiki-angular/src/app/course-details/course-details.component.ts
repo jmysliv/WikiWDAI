@@ -29,8 +29,12 @@ constructor(private route: ActivatedRoute, private mockData: MockDataServiceServ
     this.param1 = this.route.snapshot.queryParamMap.get('id');
     this.mockData.getCourse(this.param1).subscribe(res => {
       this.course = res;
-      this.selectValue = this.course.courseTeachers[0];
-      this.selectCategory = this.course.courseTeachers[0].commentCategories[0];
+      if (this.course.courseTeachers[0]) {
+        this.selectValue = this.course.courseTeachers[0];
+        if (this.course.courseTeachers[0].commentCategories[0]) {
+          this.selectCategory = this.course.courseTeachers[0].commentCategories[0];
+        }
+    }
     });
 
   }
@@ -48,22 +52,26 @@ constructor(private route: ActivatedRoute, private mockData: MockDataServiceServ
   teacherOverallRating(): number {
     let sum = 0;
     let counter = 0;
-    this.selectValue.commentCategories.forEach(element => {
+    if (this.selectValue) {
+      this.selectValue.commentCategories.forEach(element => {
       element.comments.forEach(x => {
         counter++;
         sum += x.rating;
       });
     });
+    }
     return Math.round((sum / counter) * 10) / 10;
   }
 
   teacherCategoryRating(): number {
     let sum = 0;
     let counter = 0;
-    this.selectCategory.comments.forEach(element => {
+    if (this.selectCategory) {
+       this.selectCategory.comments.forEach(element => {
         counter++;
         sum += element.rating;
-    });
+      });
+    }
     return Math.round((sum / counter) * 10) / 10;
   }
 

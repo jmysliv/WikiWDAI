@@ -1,0 +1,15 @@
+.btn{
+    cursor: pointer;
+}
+
+.submit{
+    text-align: center;
+}
+
+.error{
+    color: red;
+}
+
+.good{
+    color: green;
+}

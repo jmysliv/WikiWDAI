@@ -15,11 +15,21 @@
         <li class="nav-item ">
           <a class="nav-link" [routerLink]="['']">WIKI </a>
         </li>
-        <li class="nav-item ">
-            <a class="nav-link" >Dodaj Kurs </a>
-          </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Filtry</a>
+        <li class="nav-item dropdown order-1">
+          <button type="button" id="dropdownMenu1" data-toggle="dropdown" class="btn btn-outline-secondary dropdown-toggle">Dodaj Kurs <span class="caret"></span></button>
+          <ul class="dropdown-menu dropdown-menu mt-2 dropdown-add">
+            <li class="px-3 py-2">
+              <app-add-course></app-add-course>
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown order-1">
+            <button type="button" id="dropdownMenu1" data-toggle="dropdown" class="btn btn-outline-secondary dropdown-toggle">Filtruj <span class="caret"></span></button>
+            <ul class="dropdown-menu dropdown-menu mt-2 dropdown-add">
+              <li class="px-3 py-2">
+                <app-add-course></app-add-course>
+              </li>
+            </ul>
         </li>
       </ul>
       <ul class="nav navbar-nav flex-row justify-content-between ml-auto">

@@ -1,0 +1,117 @@
+<form class="form" role="form">
+    <div class="row">
+        <div class="col-md-6">
+                <div class="form-group">
+                    <input placeholder="Nazwa kursu" name="name" [(ngModel)]="course.name" type="text" class="validate"  #name="ngModel" required>
+                    <div class="error" *ngIf="name.touched && name.errors?.required">
+                            Name is required.
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input type="range" name="ects" class="custom-range" [(ngModel)]="course.ects" min="0" max="15" step="1">
+                    ECTS: {{course.ects}}
+                </div>
+                <div class="form-group">
+                    <input type="range" name="semester" class="custom-range" [(ngModel)]="course.semester" min="1" max="10" step="1">
+                    Semester: {{course.semester}}
+                 
+                </div>
+                <div class="form-group">
+                    <input placeholder="Max Students" name="maxStudents" [(ngModel)]="course.maxStudents" type="number" class="validate" #maxStudents="ngModel"  pattern="^[+]?([0-9]+(?:[\.][0-9]*)?|\.[0-9]+)$" required>
+                    <div class="error" *ngIf="maxStudents.touched && maxStudents.errors?.required">
+                            Max Studentsis required.
+                    </div>
+                    <div class="error" *ngIf="maxStudents.errors?.pattern && maxStudents.touched">
+                        Only numbers are permitted
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Typ kursu:</label> <br>
+                    <select  [(ngModel)]="course.courseForm" name="courseForm">
+                            <option [ngValue]="courseType"  *ngFor="let courseType of courseTypes">{{courseType}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <textarea placeholder="Opis Kursu" ref-textarea [(ngModel)]="course.description"  name="desription" rows="4" cols="20" required #description = "ngModel"></textarea>
+                    <div class="error" *ngIf="description.touched && description.errors?.required">
+                            Description required.
+                    </div>
+                </div>
+                <div class="form-group">
+                        <input placeholder="Url zdjęcia kursu" name="image" [(ngModel)]="course.image" type="text" class="validate" #courseImage="ngModel"  pattern="https://.+\.[jpg|gif|png].*" required>
+                        <div class="error" *ngIf="courseImage.touched && courseImage.errors?.required">
+                                Course Image url is required.
+                        </div>
+                        <div class="error" *ngIf="courseImage.errors?.pattern && courseImage.touched">
+                            Invalid image url.
+                        </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <label>Podaj osobe odpowiedzialną za kurs:</label>
+                <hr>
+                <div class="form-group">
+                        <input placeholder="Imię i nazwisko" name="teacherName" [(ngModel)]="course.courseTeachers[0].teacher.name" type="text" class="validate" #teacherName = "ngModel" required>
+                        <div class="error" *ngIf="teacherName.touched && teacherName.errors?.required">
+                                Teacher Name is required.
+                        </div>
+                </div>
+                <div class="form-group">
+                        <input placeholder="Url zdjęcia nauczyciela" name="teacherImage" [(ngModel)]="course.courseTeachers[0].teacher.image" type="text" class="validate"  #teacherImage="ngModel"  pattern="https://.+\.[jpg|gif|png].*" required>
+                        <div class="error" *ngIf="teacherImage.touched && teacherImage.errors?.required">
+                                Teacher Image url is required.
+                        </div>
+                        <div class="error" *ngIf="teacherImage.errors?.pattern && teacherImage.touched">
+                            Invalid image url.
+                        </div>
+                </div>
+                <div class="form-group">
+                        <input placeholder="Stopień naukowy" name="degree" [(ngModel)]="course.courseTeachers[0].teacher.degree" type="text" class="validate" #degree = "ngModel" required>
+                        <div class="error" *ngIf="degree.touched && degree.errors?.required">
+                                Degree is required.
+                        </div>
+                    </div>
+                <div class="form-group">
+                        <input placeholder="Nr telefonu" name="phone" [(ngModel)]="course.courseTeachers[0].teacher.teacherCard.phone" type="number" class="validate" #phone="ngModel"  pattern="^[+]?([0-9]+(?:[\.][0-9]*)?|\.[0-9]+)$" required>
+                        <div class="error" *ngIf="phone.touched && phone.errors?.required">
+                                Phone number required.
+                        </div>
+                        <div class="error" *ngIf="phone.errors?.pattern && phone.touched">
+                            Only numbers are permitted
+                        </div>
+                </div>
+                <div class="form-group">
+                        <input placeholder="email" name="email" [(ngModel)]="course.courseTeachers[0].teacher.teacherCard.email" type="text" class="validate" #email = "ngModel" required pattern="\S+@\S+\.\S+">
+                        <div class="error" *ngIf="email.touched && email.errors?.required">
+                               Email is required.
+                        </div>
+                        <div class="error" *ngIf="email.errors?.pattern && email.touched">
+                            Invalid email.
+                        </div>
+                 </div>
+                <div class="form-group">
+                        <input placeholder="Strona Internetowa" name="homePage" [(ngModel)]="course.courseTeachers[0].teacher.teacherCard.homePage" type="text" class="validate" #homePage = "ngModel" required pattern="https://.+\.*">
+                        <div class="error" *ngIf="homePage.touched && homePage.errors?.required">
+                                HomePage is required.
+                         </div>
+                         <div class="error" *ngIf="homePage.errors?.pattern && homePage.touched">
+                             Invalid HomePage address.
+                         </div>
+                </div>
+
+            </div>
+           
+        </div>
+        <div class="submit">
+            <hr>
+            <a  class="btn btn-secondary text-white" (click)="addCourse()">Zapisz</a>
+            <div class="error" *ngIf="err">
+                    Wypałnij formularz poprawnie!
+            </div>
+            <div class="good" *ngIf="good">
+                    Dodano kurs.
+            </div>
+        </div>
+            
+    
+</form>

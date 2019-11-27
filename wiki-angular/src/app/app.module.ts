@@ -12,6 +12,7 @@ import { RateCourseComponent } from './rate-course/rate-course.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { AddCommentComponent } from './add-comment/add-comment.component';
 import { FormsModule } from '@angular/forms';
+import { AddCourseComponent } from './add-course/add-course.component';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { FormsModule } from '@angular/forms';
       CourseDetailsComponent,
       HomePageComponent,
       RateCourseComponent,
-      AddCommentComponent
+      AddCommentComponent,
+      AddCourseComponent
    ],
    imports: [
       BrowserModule,
