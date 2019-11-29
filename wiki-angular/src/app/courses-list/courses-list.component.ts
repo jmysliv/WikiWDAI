@@ -1,6 +1,9 @@
+import { CourseFilter } from './../search-pipe.pipe';
+import { FilterService } from './../filter.service';
 import { MockDataServiceService } from './../mock-data-service.service';
 import { Component, OnInit } from '@angular/core';
 import { Course } from '../course';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-courses-list',
@@ -9,7 +12,17 @@ import { Course } from '../course';
 })
 export class CoursesListComponent implements OnInit {
   courses: Array<Course>;
-  constructor(private mockData: MockDataServiceService) { }
+  courseFilter: CourseFilter = null;
+  subscription: Subscription;
+  constructor(private mockData: MockDataServiceService, private filterService: FilterService) {
+    this.subscription = this.filterService.getFilter().subscribe(message => {
+      if (message) {
+        this.courseFilter = message;
+      } else {
+        this.courseFilter = null;
+      }
+    });
+  }
 
   ngOnInit() {
       this.mockData.getCourses().subscribe(res => {

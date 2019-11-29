@@ -5,7 +5,7 @@
         </div>
     </div>
     <div class="row">
-        <app-course-in-list class="col-md-4 zebra" *ngFor="let course of courses" [kurs] = "course" (removeCourse)="removeCourse($event)"></app-course-in-list>
+        <app-course-in-list class="col-md-4 zebra" *ngFor="let course of (courses | searchPipe : courseFilter)" [kurs] = "course" (removeCourse)="removeCourse($event)"></app-course-in-list>
     </div>
 </div>
    

@@ -13,6 +13,8 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { AddCommentComponent } from './add-comment/add-comment.component';
 import { FormsModule } from '@angular/forms';
 import { AddCourseComponent } from './add-course/add-course.component';
+import { FilterCourseComponent } from './filter-course/filter-course.component';
+import { SearchPipePipe } from './search-pipe.pipe';
 
 
 @NgModule({
@@ -25,7 +27,9 @@ import { AddCourseComponent } from './add-course/add-course.component';
       HomePageComponent,
       RateCourseComponent,
       AddCommentComponent,
-      AddCourseComponent
+      AddCourseComponent,
+      FilterCourseComponent,
+      SearchPipePipe
    ],
    imports: [
       BrowserModule,
