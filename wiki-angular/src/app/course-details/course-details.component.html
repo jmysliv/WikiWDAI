@@ -82,6 +82,10 @@
                       <td>{{course.maxStudents}}</td>
                   </tr>
                   <tr>
+                    <td>Liczba zapisanych na kurs:</td>
+                    <td>{{course.enrolledStudents.length}}</td>
+                </tr>
+                  <tr>
                       <td>Ocena Kursu:</td>
                       <td> <span class="text-warning">&#9733; &#9733; &#9733; &#9733; &#9734;</span>
                            {{courseRating()}}
@@ -90,7 +94,11 @@
                 </tbody>
               </table>
             <p class="card-text">{{course.description}}</p>
-            <a  class="btn btn-success text-white" (click)="toggleChild()">Oceń Kurs</a>
+            <a  *ngIf="loggedUser != null && enrollOnCourse === false" class="btn btn-success text-white" (click)="enroll()">Zapisz się na kurs!</a>
+            <div class="noPlace" *ngIf="noPlaceInCourse">
+              Nie ma miejsca na kursie!
+            </div>
+            <a  *ngIf="loggedUser != null && enrollOnCourse" class="btn btn-success text-white" (click)="unEnroll()">Wypisz się z kursu!</a>
             <app-rate-course [showMePartially]="showVar" [kurs] = "course"></app-rate-course>
           </div>
         </div>

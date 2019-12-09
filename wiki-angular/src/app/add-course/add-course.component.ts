@@ -1,3 +1,4 @@
+import { ActivatedRoute } from '@angular/router';
 import { MockDataServiceService } from './../mock-data-service.service';
 import { Course, CourseTypes } from './../course';
 import { Component, OnInit } from '@angular/core';
@@ -13,10 +14,11 @@ course: Course;
 courseTypes = Object.values(CourseTypes).slice(0, 4);
 good = false;
 err = false;
+param1 = null;
 
   setUp() {
     this.course =  {
-      id: '',
+      id: uuid.v4(),
     name: '',
     ects: 0,
     semester: 1,
@@ -59,15 +61,20 @@ err = false;
 
 
 
-  constructor(private mockData: MockDataServiceService) { }
+  constructor(private mockData: MockDataServiceService, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.setUp();
+    if (this.route.snapshot.queryParamMap.get('id')) {
+      this.mockData.getCourse(this.route.snapshot.queryParamMap.get('id')).subscribe(res => {
+        this.course = res;
+      });
+    }
+    this.param1 = this.route.snapshot.queryParamMap.get('id');
   }
 
 
   validate(): boolean {
-    this.course.id = uuid.v4();
     if (this.course.name === '') {return false; }
     if (this.course.maxStudents === null) {return false; }
     if (this.course.description === '') {return false; }
@@ -84,12 +91,17 @@ err = false;
 
   addCourse() {
     if (this.validate()) {
-      this.mockData.addCourse(this.course).subscribe(res => {});
+      if (this.param1) {
+        this.mockData.patchCourse(this.course, this.course.id);
+      } else {
+        this.mockData.addCourse(this.course).subscribe(res => {});
+      }
       this.err = false;
       this.good = true;
       setTimeout(() => {
         this.good = false;
-        this.setUp();
+        if (this.param1 === null) { this.setUp(); }
+        document.getElementById('dropdownMenuAddCourse').click();
       },
       2000);
     } else {

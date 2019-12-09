@@ -1,3 +1,5 @@
+import { Subscription } from 'rxjs';
+import { UserService, User } from './../user.service';
 import { Course } from './../course';
 import { Component, OnInit, Input, Output, EventEmitter  } from '@angular/core';
 
@@ -8,12 +10,21 @@ import { Component, OnInit, Input, Output, EventEmitter  } from '@angular/core';
   styleUrls: ['./course-in-list.component.css']
 })
 export class CourseInListComponent implements OnInit {
-
+ subscription: Subscription;
+  loggedUser: User;
   // tslint:disable-next-line:no-input-rename
   @Input('kurs') course: Course;
   @Output() removeCourse = new EventEmitter<Course> ();
-  constructor() {
+  constructor(private userService: UserService) {
+    this.subscription = this.userService.isLoggedIn().subscribe(message => {
+      if (message) {
+        this.loggedUser = message;
+      } else {
+        this.loggedUser = null;
+      }
+    });
   }
+
 
   courseRating(): number {
     let sum = 0;
@@ -39,6 +50,11 @@ export class CourseInListComponent implements OnInit {
 
   deleteCourse() {
     this.removeCourse.emit(this.course);
+  }
+
+
+  checkIfAdmin() {
+    return this.userService.checkIfAdmin(this.loggedUser);
   }
 
   ngOnInit() {

@@ -1,8 +1,11 @@
+import { UserService } from './../user.service';
+import { Subscription } from 'rxjs';
 import { RatingValues } from './../ratings';
 import { MockDataServiceService } from './../mock-data-service.service';
 import { Course } from './../course';
 import { Component, OnInit, Input } from '@angular/core';
 import {NgbRatingConfig} from '@ng-bootstrap/ng-bootstrap';
+import { User } from '../user.service';
 
 
 @Component({
@@ -17,10 +20,18 @@ export class RateCourseComponent implements OnInit {
   @Input('kurs') course: Course;
   // tslint:disable-next-line:no-input-rename
   @Input('showMePartially') showMePartially: boolean;
-
+  loggedUser: User;
+  subscription: Subscription;
   currentRate: 1 | 2 | 3 | 4 | 5 = 2;
-  constructor(config: NgbRatingConfig, private mockData: MockDataServiceService) {
+  constructor(config: NgbRatingConfig, private mockData: MockDataServiceService, private userService: UserService) {
     config.max = 5;
+    this.subscription = this.userService.isLoggedIn().subscribe(message => {
+      if (message) {
+        this.loggedUser = message;
+      } else {
+        this.loggedUser = null;
+      }
+    });
   }
 
   ngOnInit() {
@@ -29,12 +40,11 @@ export class RateCourseComponent implements OnInit {
   addRate() {
     const rating = {
       rating: this.currentRate,
-      studentId: 'seba'
+      studentId: this.loggedUser.id
     };
     this.course.ratings.push(rating);
-    this.mockData.addRating(this.course, this.course.id);
+    this.mockData.patchCourse(this.course, this.course.id);
     this.showMePartially = false;
-    console.log(this.course);
   }
 
 }

@@ -14,6 +14,7 @@ export class CoursesListComponent implements OnInit {
   courses: Array<Course>;
   courseFilter: CourseFilter = null;
   subscription: Subscription;
+  courseSubscription: Subscription;
   constructor(private mockData: MockDataServiceService, private filterService: FilterService) {
     this.subscription = this.filterService.getFilter().subscribe(message => {
       if (message) {
@@ -25,8 +26,12 @@ export class CoursesListComponent implements OnInit {
   }
 
   ngOnInit() {
-      this.mockData.getCourses().subscribe(res => {
-      this.courses = res;
+    this.courseSubscription = this.mockData.subscribeCourseList().subscribe(message => {
+      if (message) {
+        this.courses = message;
+      } else {
+        this.courses = null;
+      }
     });
   }
 

@@ -19,3 +19,7 @@
 .btn{
     cursor: pointer;
 }
+
+.noPlace{
+    color: red;
+}

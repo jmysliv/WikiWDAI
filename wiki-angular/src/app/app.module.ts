@@ -11,10 +11,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { RateCourseComponent } from './rate-course/rate-course.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { AddCommentComponent } from './add-comment/add-comment.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AddCourseComponent } from './add-course/add-course.component';
 import { FilterCourseComponent } from './filter-course/filter-course.component';
 import { SearchPipePipe } from './search-pipe.pipe';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
 
 
 @NgModule({
@@ -29,14 +31,17 @@ import { SearchPipePipe } from './search-pipe.pipe';
       AddCommentComponent,
       AddCourseComponent,
       FilterCourseComponent,
-      SearchPipePipe
+      SearchPipePipe,
+      LoginComponent,
+      RegisterComponent
    ],
    imports: [
       BrowserModule,
       AppRoutingModule,
       HttpClientModule,
       NgbModule,
-      FormsModule
+      FormsModule,
+      ReactiveFormsModule
    ],
    providers: [],
    bootstrap: [

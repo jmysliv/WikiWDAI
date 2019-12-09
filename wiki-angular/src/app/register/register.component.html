@@ -1,0 +1,47 @@
+<div class="form">
+        <form  class="form needs-validation" [formGroup]="signUpForm" (ngSubmit)="onSubmit()" autocomplete="off">
+                <div class="form-group">
+                    <input type="name" placeholder="Imie i Nazwisko" class="form-control" formControlName="name"
+                        [ngClass]="{ 'is-invalid': formSignUpAttempt && f.name.errors}" required>
+                    <div *ngIf="formSignUpAttempt" class="invalid-feedback">
+                        <div *ngIf="f.name.errors && f.name.errors.required">Name is required</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input type="email" placeholder="Email" class="form-control" formControlName="email"
+                      [ngClass]="{ 'is-invalid': formSignUpAttempt && (f.email.errors || emailAlreadyExists())}" required>
+                    <div *ngIf="formSignUpAttempt" class="invalid-feedback">
+                      <div *ngIf="emailAlreadyExists()">This email adress already exists !</div>
+                      <div *ngIf="f.email.errors && f.email.errors.email">Email must be a valid email address</div>
+                      <div *ngIf="f.email.errors && f.email.errors.required">Email is required</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" placeholder="Password" formControlName="password"
+                      [ngClass]="{ 'is-invalid': formSignUpAttempt && f.password.errors }" required>
+                    <div *ngIf="formSignUpAttempt && f.password.errors" class="invalid-feedback">
+                      <div *ngIf="f.password.errors.minlength">Password is too short (min 6)!</div>
+                      <div *ngIf="f.password.errors.required">Password is required!</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" placeholder="Confirm password" formControlName="conPassword"
+                      [ngClass]="{ 'is-invalid': formSignUpAttempt && (f.conPassword.errors || !passwordsMustMatch())}" required>
+                    <div *ngIf="formSignUpAttempt" class="invalid-feedback">
+                      <div *ngIf="!passwordsMustMatch()">Passwords dont match !</div>
+                      <div *ngIf="f.conPassword.errors && f.conPassword.errors.minlength">Password is too short (min 6) !</div>
+                      <div *ngIf="f.conPassword.errors && f.conPassword.errors.required">Confirm your password !</div>
+                    </div>
+                </div>
+                    <div *ngIf="registrationComplete" class="alert alert-success" role="alert">
+                        Registration complete!
+                    </div>
+                    <div class="form-group">
+                            <button type="submit" class="btn btn-primary btn-block" >Sign up!</button>
+                    </div>
+                    <div class="form-group text-center">
+                            <button  (click)="changeDisplay();  $event.stopPropagation()" class="btn btn-secondary btn-block" >Back</button>
+                    </div>
+            </form>
+</div>
+

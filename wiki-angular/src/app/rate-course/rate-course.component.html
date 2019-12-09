@@ -1,5 +1,5 @@
-<div class="container" *ngIf="showMePartially">
+<div class="container" *ngIf="showMePartially && loggedUser">
     <ngb-rating [(rate)]="currentRate"></ngb-rating>
     <hr>
-    <a  class="btn btn-secondary text-white" (click)="addRate()">Zapisz</a>
+    <a  class="btn btn-secondary text-white" (click)="addRate()">Oceń kurs</a>
 </div>

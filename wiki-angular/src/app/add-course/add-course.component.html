@@ -103,14 +103,17 @@
            
         </div>
         <div class="submit">
-            <hr>
-            <a  class="btn btn-secondary text-white" (click)="addCourse()">Zapisz</a>
-            <div class="error" *ngIf="err">
-                    Wypałnij formularz poprawnie!
-            </div>
-            <div class="good" *ngIf="good">
-                    Dodano kurs.
-            </div>
+                <hr>
+                <a  class="btn btn-secondary text-white" (click)="addCourse()">Zapisz</a>
+                <div class="error" *ngIf="err">
+                        Wypałnij formularz poprawnie!
+                </div>
+                <div class="good" *ngIf="good && param1 === null">
+                        Dodano kurs.
+                </div>
+                <div class="good" *ngIf="good && param1">
+                        Dodano zmiany.
+                </div>
         </div>
             
     
