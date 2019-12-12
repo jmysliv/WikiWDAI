@@ -34,7 +34,7 @@ export class SearchPipePipe implements PipeTransform {
 
     if (ects.active) {
       courses =  courses.filter(course =>
-           (course.ects < ects.maxvalue && course.ects > ects.minvalue)
+           (course.ects <= ects.maxvalue && course.ects >= ects.minvalue)
       );
   }
     if (semester.active) {
@@ -52,7 +52,7 @@ export class SearchPipePipe implements PipeTransform {
           sum += element.rating;
         });
         const rate =  Math.round((sum / counter) * 10) / 10;
-        return (rate < rating.maxvalue && rate > rating.minvalue);
+        return (rate <= rating.maxvalue && rate >= rating.minvalue);
       });
   }
 

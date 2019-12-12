@@ -27,3 +27,19 @@
     font-size: 36px; 
     cursor: pointer;
   }
+
+  .star {
+    position: relative;
+    display: inline-block;
+    font-size: 3rem;
+    color: #d3d3d3;
+  }
+  .full {
+    color:rgb(200, 200, 67);
+  }
+  .half {
+    position: absolute;
+    display: inline-block;
+    overflow: hidden;
+    color: rgb(200, 200, 67);
+  }

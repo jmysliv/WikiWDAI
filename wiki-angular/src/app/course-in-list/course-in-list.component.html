@@ -23,7 +23,11 @@
         </table>
         {{courseRating()}}
         <br><br>
-        <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small><br>
+        <ng-template #t let-fill="fill">
+            <span class="star" [class.full]="fill === 100">
+                <span class="half" [style.width.%]="fill">&#9733;</span> &#9733; </span>
+        </ng-template>
+        <ngb-rating [rate]="courseRating()" [starTemplate]="t" [readonly]="true" max="5"></ngb-rating>
         </div>
         <div class="card-footer">
         <button type="button" class="btn btn-dark" [routerLink]="['/courses', course.name]" [queryParams]="{ id: course.id}">Więcej!</button>
