@@ -22,3 +22,15 @@ export interface Course {
     courseTeachers: CourseTeacher[];
     enrolledStudents: string[];
 }
+export interface CourseToBeAdded {
+    name: string;
+    ects: number;
+    semester: number;
+    maxStudents: number;
+    courseForm: CourseTypes;
+    ratings: RatingValues[];
+    description: string;
+    image: string;
+    courseTeachers: CourseTeacher[];
+    enrolledStudents: string[];
+}

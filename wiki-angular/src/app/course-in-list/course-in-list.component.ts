@@ -1,5 +1,5 @@
 import { Subscription } from 'rxjs';
-import { UserService, User } from './../user.service';
+import { UserService, User, UserToBeDisplayed } from './../user.service';
 import { Course } from './../course';
 import { Component, OnInit, Input, Output, EventEmitter  } from '@angular/core';
 
@@ -11,7 +11,7 @@ import { Component, OnInit, Input, Output, EventEmitter  } from '@angular/core';
 })
 export class CourseInListComponent implements OnInit {
  subscription: Subscription;
-  loggedUser: User;
+  loggedUser: UserToBeDisplayed;
   // tslint:disable-next-line:no-input-rename
   @Input('kurs') course: Course;
   @Output() removeCourse = new EventEmitter<Course> ();

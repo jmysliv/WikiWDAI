@@ -1,5 +1,5 @@
 import { Subscription } from 'rxjs';
-import { UserService } from './../user.service';
+import { UserService, UserToBeDisplayed } from './../user.service';
 import { CourseTeacher, Section } from './../teacher';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -26,7 +26,7 @@ showVar = false;
 enrollOnCourse = false;
 noPlaceInCourse = false;
 showCommentForm = false;
-loggedUser: User;
+loggedUser: UserToBeDisplayed;
 subscription: Subscription;
 courseSubscription: Subscription;
 constructor(private route: ActivatedRoute, private mockData: MockDataServiceService, private userService: UserService) {

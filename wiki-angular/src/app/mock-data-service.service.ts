@@ -1,5 +1,6 @@
+import { UserService } from './user.service';
 import { RatingValues } from './ratings';
-import { Course } from './course';
+import { Course, CourseToBeAdded } from './course';
 import { of, Observable, BehaviorSubject } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse} from '@angular/common/http';
@@ -10,7 +11,7 @@ import { HttpClient, HttpErrorResponse} from '@angular/common/http';
 })
 export class MockDataServiceService {
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient, private userService: UserService) { }
   private REST_API_SERVER = 'http://localhost:3000';
   private currentCourses: BehaviorSubject<Course[]> = new BehaviorSubject<Course[]>(null);
 
@@ -22,15 +23,15 @@ export class MockDataServiceService {
   }
 
   getCourses() {
-    return this.httpClient.get<Course[]>(`${this.REST_API_SERVER}/courses`);
+    return this.httpClient.get<Course[]>(`${this.REST_API_SERVER}/courses`, { headers: this.userService.setUpHeaders()});
   }
 
   getCourse(cName: string) {
-    return this.httpClient.get<Course>(`${this.REST_API_SERVER}/courses/${cName}`);
+    return this.httpClient.get<Course>(`${this.REST_API_SERVER}/courses/${cName}`, { headers: this.userService.setUpHeaders()});
   }
 
   patchCourse( itemToAdd, id: string) {
-    this.httpClient.put<Course>(`${this.REST_API_SERVER}/courses/${id}`, itemToAdd).subscribe(
+    this.httpClient.put<Course>(`${this.REST_API_SERVER}/courses/${id}`, itemToAdd, { headers: this.userService.setUpHeaders()}).subscribe(
       res => {
         console.log('received ok response from patch request');
         this.getCourses().subscribe(resp => {
@@ -45,7 +46,7 @@ export class MockDataServiceService {
   }
 
   deleteCourse(course: Course): Observable<{}> {
-    const resp = this.httpClient.delete<Course>(`${this.REST_API_SERVER}/courses/${course.id}`);
+    const resp = this.httpClient.delete<Course>(`${this.REST_API_SERVER}/courses/${course.id}`, {headers: this.userService.setUpHeaders()});
     resp.subscribe(() =>
       this.getCourses().subscribe(res =>
         this.currentCourses.next(res)
@@ -53,16 +54,14 @@ export class MockDataServiceService {
     return resp;
   }
 
-  addCourse(course: Course): Observable<{}> {
-    const response =  of(this.httpClient.post<Course>(`${this.REST_API_SERVER}/courses`, course).subscribe( res => {
-       console.log(res);
+  addCourse(course: CourseToBeAdded): Observable<{}> {
+    const response = this.httpClient.post<CourseToBeAdded>
+    (`${this.REST_API_SERVER}/courses`, course, {headers: this.userService.setUpHeaders()});
+    response.subscribe( res => {
        this.getCourses().subscribe(resp => {
         this.currentCourses.next(resp);
         });
-      },
-      (err: HttpErrorResponse) => {
-        console.log(err);
-      } ));
+      });
     return response;
   }
 }

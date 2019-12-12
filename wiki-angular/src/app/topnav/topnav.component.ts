@@ -1,5 +1,5 @@
 import { ActivatedRoute } from '@angular/router';
-import { User, UserService } from './../user.service';
+import { User, UserService, UserToBeDisplayed } from './../user.service';
 import { Subscription } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 
@@ -12,7 +12,7 @@ import { Component, OnInit } from '@angular/core';
 export class TopnavComponent implements OnInit {
   subscription: Subscription;
   displayLogin = true;
-  loggedUser: User;
+  loggedUser: UserToBeDisplayed;
   param1 = 'Dodaj Kurs';
   constructor(private userService: UserService, private route: ActivatedRoute) {
     this.subscription = this.userService.isLoggedIn().subscribe(message => {

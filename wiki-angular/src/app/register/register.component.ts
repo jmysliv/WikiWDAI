@@ -25,9 +25,6 @@ export class RegisterComponent implements OnInit {
       password: ['', [Validators.required, Validators.minLength(6)]],
       conPassword: ['', [Validators.required, Validators.minLength(6)]]
     });
-    this.userService.getUsers().subscribe(res => {
-      this.users = res;
-    });
   }
   changeDisplay() {
     this.displayLogin.emit(false);
@@ -49,13 +46,13 @@ export class RegisterComponent implements OnInit {
   }
 
   emailAlreadyExists(): boolean {
-    this.emailAlreadyExist = false;
-    this.users.forEach(element => {
-      if (element.email === this.signUpForm.value.email) {
-        this.emailAlreadyExist = true;
-        return;
-      }
-    });
+    // this.emailAlreadyExist = false;
+    // this.users.forEach(element => {
+    //   if (element.email === this.signUpForm.value.email) {
+    //     this.emailAlreadyExist = true;
+    //     return;
+    //   }
+    // });
     return this.emailAlreadyExist;
   }
 
@@ -64,7 +61,7 @@ export class RegisterComponent implements OnInit {
     if (this.signUpForm.invalid) { return; }
     this.emailAlreadyExist = false;
     const user: User = {
-      id: uuid.v4(),
+      admin: false,
       name: this.signUpForm.value.name,
       email: this.signUpForm.value.email,
       password: this.signUpForm.value.password
@@ -72,12 +69,12 @@ export class RegisterComponent implements OnInit {
 
     if (!this.passwordsMustMatch()) { return; }
 
-    if (this.emailAlreadyExists()) {return; }
+    this.userService.addUser(user).subscribe( res => {
+       this.registrationComplete = true;
 
-
-    this.userService.addUser(user);
-    this.registrationComplete = true;
-
+    }, err => {
+      this.emailAlreadyExist = true; return;
+    });
   }
 
 

@@ -87,7 +87,7 @@
                 </tr>
                   <tr>
                       <td>Ocena Kursu:</td>
-                      <td> 
+                      <td> {{courseRating()}}<br>
                         <ng-template #t let-fill="fill">
                             <span class="star" [class.full]="fill === 100">
                             <span class="half" [style.width.%]="fill">&#9733;</span> &#9733; </span>

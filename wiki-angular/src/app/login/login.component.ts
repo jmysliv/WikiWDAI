@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
   form: FormGroup;
   private formSubmitAttempt: boolean;
   invalidData = false;
-  users: Array<User>;
+  // users: Array<User>;
   constructor(  private fb: FormBuilder, private userService: UserService) { }
 
   ngOnInit() {
@@ -24,9 +24,9 @@ export class LoginComponent implements OnInit {
       password: ['', Validators.required]
     });
 
-    this.userService.getUsers().subscribe(res => {
-      this.users = res;
-    });
+    // this.userService.getUsers().subscribe(res => {
+    //   this.users = res;
+    // });
   }
 
   changeDisplay() {
@@ -44,13 +44,10 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    this.formSubmitAttempt = true;
-    if (this.form.invalid) { return; }
+    if (this.form.invalid) { this.formSubmitAttempt = true; return; }
 
-    if (!this.userService.login(this.form.value.email, this.form.value.password, this.users)) {
-      this.invalidData = true;
-      return;
-    }
+    this.userService.login(this.form.value.email, this.form.value.password);
+    if ( this.userService.isLoggedIn === null) { this.formSubmitAttempt = true; this.invalidData = true; }
 
   }
 

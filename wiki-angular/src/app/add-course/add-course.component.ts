@@ -1,6 +1,6 @@
 import { ActivatedRoute } from '@angular/router';
 import { MockDataServiceService } from './../mock-data-service.service';
-import { Course, CourseTypes } from './../course';
+import { Course, CourseTypes, CourseToBeAdded } from './../course';
 import { Component, OnInit } from '@angular/core';
 import * as uuid from 'uuid';
 
@@ -94,7 +94,9 @@ param1 = null;
       if (this.param1) {
         this.mockData.patchCourse(this.course, this.course.id);
       } else {
-        this.mockData.addCourse(this.course).subscribe(res => {});
+        delete this.course.id;
+        const courseToBeAdd: CourseToBeAdded = this.course as CourseToBeAdded;
+        this.mockData.addCourse(courseToBeAdd).subscribe(res => {});
       }
       this.err = false;
       this.good = true;

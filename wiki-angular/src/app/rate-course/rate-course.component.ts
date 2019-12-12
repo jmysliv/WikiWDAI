@@ -1,4 +1,4 @@
-import { UserService } from './../user.service';
+import { UserService, UserToBeDisplayed } from './../user.service';
 import { Subscription } from 'rxjs';
 import { RatingValues } from './../ratings';
 import { MockDataServiceService } from './../mock-data-service.service';
@@ -20,7 +20,7 @@ export class RateCourseComponent implements OnInit {
   @Input('kurs') course: Course;
   // tslint:disable-next-line:no-input-rename
   @Input('showMePartially') showMePartially: boolean;
-  loggedUser: User;
+  loggedUser: UserToBeDisplayed;
   subscription: Subscription;
   currentRate: 1 | 2 | 3 | 4 | 5 = 2;
   constructor(config: NgbRatingConfig, private mockData: MockDataServiceService, private userService: UserService) {
@@ -42,6 +42,7 @@ export class RateCourseComponent implements OnInit {
       rating: this.currentRate,
       studentId: this.loggedUser.id
     };
+    console.log(rating);
     this.course.ratings.push(rating);
     this.mockData.patchCourse(this.course, this.course.id);
     this.showMePartially = false;
