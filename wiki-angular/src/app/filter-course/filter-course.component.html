@@ -1,52 +1,30 @@
 <form class="form" role="form">
     <div class="text-center">
             <div class="form-group">
-                    <label >
-                            Chcesz wyszukać po nazwie?
-                    </label><br>
-                    <input type="checkbox" id="nameCheck" name="nameCheck" [(ngModel)]="nameCheck" />
-                    <div class="form-group" *ngIf="nameCheck">
+                    <div class="form-group">
                        <input placeholder="Szukana nazwa kursu" name="name" [(ngModel)]="name" type="text" class="validate">
                     </div>
             </div>
             <div class="form-group">
-                <label >
-                        Chcesz wyszukać po liczbie ects?
-                </label><br>
-                <input type="checkbox" id="ectsCheck" name="ectsCheck" [(ngModel)]="ectsCheck" />
-                <div class="form-group" *ngIf="ectsCheck">
-                    <input type="range" name="minects" class="custom-range" [(ngModel)]="minects" min="0" max="15" step="1">
-                    MIN. ECTS: {{minects}}
-                    <input type="range" name="maxects" class="custom-range" [(ngModel)]="maxects" min="0" max="15" step="1">
-                    MAX. ECTS: {{maxects}}
+                <div class="form-group">
+                    <ng5-slider [(value)]="minects" [(highValue)]="maxects" [options]="ectsOptions"></ng5-slider>
                 </div>
             </div>
             <div class="form-group">
-                    <label >
-                            Chcesz wyszukać po semestrze?
-                    </label><br>
-                    <input type="checkbox" id="semesterCheck" name="semesterCheck" [(ngModel)]="semesterCheck" />
-                    <div class="form-group" *ngIf="semesterCheck">
-                        <input type="range" name="semester" class="custom-range" [(ngModel)]="semester" min="1" max="10" step="1">
-                        Semester: {{semester}}
+                    <div class="form-group" >
+                        <ng5-slider [(value)]="semester"  [options]="semesterOptions"></ng5-slider>
                     </div>
             </div>
             <div class="form-group">
-                    <label >
-                            Chcesz wyszukać po ocenie?
-                    </label><br>
-                    <input type="checkbox" id="rateCheck" name="rateCheck" [(ngModel)]="rateCheck" />
-                    <div class="form-group" *ngIf="rateCheck">
-                        <input type="range" name="minrate" class="custom-range" [(ngModel)]="minrate" min="1" max="5" step="0.5">
-                        Minimalna ocena: {{minrate}}
-                        <input type="range" name="maxrate" class="custom-range" [(ngModel)]="maxrate" min="1" max="5" step="0.5">
-                        Maksymalna ocena: {{maxrate}}
+                    <div class="form-group">
+                        <ng5-slider [(value)]="minrate" [(highValue)]="maxrate" [options]="rateOptions"></ng5-slider>
                     </div>
             </div>
      
         <div class="submit">
             <hr>
             <a  class="btn btn-secondary text-white" (click)="filter()">Filtruj</a>
+            <a  class="btn btn-link" (click)="clearMessages()">Wyczyść filtry</a>
         </div>   
     </div>
 </form>

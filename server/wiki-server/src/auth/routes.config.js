@@ -9,11 +9,4 @@ router.post('/', [
         login
     ]);
 
-router.post('/refresh', [
-        validJWTNeeded,
-        verifyRefreshBodyField,
-        validRefreshNeeded,
-        login
-    ]);
-
 export default router;

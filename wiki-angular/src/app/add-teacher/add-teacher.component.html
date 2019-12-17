@@ -1,0 +1,74 @@
+<div class="container" *ngIf="checkTeacher()">
+    <a  *ngIf="Admin" class="btn btn-success text-white" (click)="teacherForm()">Dodaj Nauczyciela</a>
+    <form *ngIf="showMe">
+        <div class="container">
+            <label>Dodaj nauczyciela do kursu:</label>
+            <hr>
+            <div class="form-group">
+                    <input placeholder="Imię i nazwisko" name="teacherName" [(ngModel)]="newTeacher.teacher.name" type="text" class="validate" #teacherName = "ngModel" required>
+                    <div class="error" *ngIf="teacherName.touched && teacherName.errors?.required">
+                            Teacher Name is required.
+                    </div>
+            </div>
+            <div class="form-group">
+                    <input placeholder="Url zdjęcia nauczyciela" name="teacherImage" [(ngModel)]="newTeacher.teacher.image" type="text" class="validate"  #teacherImage="ngModel"  pattern="https://.+\.[jpg|gif|png].*" required>
+                    <div class="error" *ngIf="teacherImage.touched && teacherImage.errors?.required">
+                            Teacher Image url is required.
+                    </div>
+                    <div class="error" *ngIf="teacherImage.errors?.pattern && teacherImage.touched">
+                        Invalid image url.
+                    </div>
+            </div>
+            <div class="form-group">
+                    <input placeholder="Stopień naukowy" name="degree" [(ngModel)]="newTeacher.teacher.degree" type="text" class="validate" #degree = "ngModel" required>
+                    <div class="error" *ngIf="degree.touched && degree.errors?.required">
+                            Degree is required.
+                    </div>
+                </div>
+            <div class="form-group">
+                    <input placeholder="Nr telefonu" name="phone" [(ngModel)]="newTeacher.teacher.teacherCard.phone" type="number" class="validate" #phone="ngModel"  pattern="^[+]?([0-9]+(?:[\.][0-9]*)?|\.[0-9]+)$" required>
+                    <div class="error" *ngIf="phone.touched && phone.errors?.required">
+                            Phone number required.
+                    </div>
+                    <div class="error" *ngIf="phone.errors?.pattern && phone.touched">
+                        Only numbers are permitted
+                    </div>
+            </div>
+            <div class="form-group">
+                    <input placeholder="email" name="email" [(ngModel)]="newTeacher.teacher.teacherCard.email" type="text" class="validate" #email = "ngModel" required pattern="\S+@\S+\.\S+">
+                    <div class="error" *ngIf="email.touched && email.errors?.required">
+                        Email is required.
+                    </div>
+                    <div class="error" *ngIf="email.errors?.pattern && email.touched">
+                        Invalid email.
+                    </div>
+            </div>
+            <div class="form-group">
+                    <input placeholder="Strona Internetowa" name="homePage" [(ngModel)]="newTeacher.teacher.teacherCard.homePage" type="text" class="validate" #homePage = "ngModel" required pattern="https://.+\.*">
+                    <div class="error" *ngIf="homePage.touched && homePage.errors?.required">
+                            HomePage is required.
+                    </div>
+                    <div class="error" *ngIf="homePage.errors?.pattern && homePage.touched">
+                        Invalid HomePage address.
+                    </div>
+            </div>
+        </div>
+        <div class="submit">
+            <hr>
+            <a  class="btn btn-secondary text-white" (click)="addTeacher()">Zapisz</a>
+            <div class="error" *ngIf="err">
+                    Wypałnij formularz poprawnie!
+            </div>
+            <div class="good" *ngIf="good">
+                    Dodano Nauczyciela.
+            </div>
+        </div>
+
+
+    </form>
+</div>
+
+<div *ngIf="checkTeacher() === false">
+    <a *ngIf="Admin" id="closebtn" class="closebtn" (click)="deleteTeacher()">&times;</a>
+</div>
+

@@ -18,7 +18,7 @@ param1 = null;
 
   setUp() {
     this.course =  {
-      id: uuid.v4(),
+    id: uuid.v4(),
     name: '',
     ects: 0,
     semester: 1,
@@ -30,7 +30,7 @@ param1 = null;
     courseTeachers: [
       {
         teacher: {
-          id: '',
+          id: uuid.v4(),
           name: '',
           image: '',
           degree: '',
@@ -91,12 +91,12 @@ param1 = null;
 
   addCourse() {
     if (this.validate()) {
-      if (this.param1) {
+      if (this.param1 !== null) {
         this.mockData.patchCourse(this.course, this.course.id);
       } else {
         delete this.course.id;
         const courseToBeAdd: CourseToBeAdded = this.course as CourseToBeAdded;
-        this.mockData.addCourse(courseToBeAdd).subscribe(res => {});
+        this.mockData.addCourse(courseToBeAdd);
       }
       this.err = false;
       this.good = true;

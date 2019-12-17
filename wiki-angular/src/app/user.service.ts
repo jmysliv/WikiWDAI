@@ -1,4 +1,3 @@
-import { User } from './user.service';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of, BehaviorSubject } from 'rxjs';
@@ -26,13 +25,6 @@ export interface LoginResponse {accessToken: string; refreshToken: string; }
   providedIn: 'root'
 })
 export class UserService {
-  // private admins: Array<User> = [
-  //   { id: '02b5d5cf-c322-4fd6-bd31-d8473fc43374',
-  //     name: 'admin',
-  //     email: 'admin@admin.com',
-  //     password: 'aaaaaa'
-  //   }
-  // ];
   private loggedIn: BehaviorSubject<UserToBeDisplayed> = new BehaviorSubject<UserToBeDisplayed>(null);
   REST_API_SERVER = 'http://localhost:3000';
   constructor(private httpClient: HttpClient, private router: Router) {
@@ -81,13 +73,6 @@ export class UserService {
   }
 
   login(login, password) {
-    // users.forEach(element => {
-    //   if ( element.email === login && element.password === password ) {
-    //     this.loggedIn.next(element);
-    //     flag = true;
-    //   }
-    // });
-    // return flag;
     let token;
     return this.httpClient.post<LoginResponse>(`${this.REST_API_SERVER}/auth`,  {email: login,
       password}, { headers: this.setUpHeaders()}).subscribe(res => {
@@ -113,14 +98,7 @@ export class UserService {
   }
 
   checkIfAdmin(user: UserToBeDisplayed): boolean {
-    // let flag = false;
     if (user) {
-      // this.admins.forEach(element => {
-      //     if (user.id === element.id) {
-      //       flag = true;
-      //       return;
-      //     }
-      //   });
       return user.admin;
     }
     return false;

@@ -17,6 +17,9 @@ import { FilterCourseComponent } from './filter-course/filter-course.component';
 import { SearchPipePipe } from './search-pipe.pipe';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { AddTeacherComponent } from './add-teacher/add-teacher.component';
+import { Ng5SliderModule } from 'ng5-slider';
+import { FooterComponent } from './footer/footer.component';
 
 
 @NgModule({
@@ -33,7 +36,9 @@ import { RegisterComponent } from './register/register.component';
       FilterCourseComponent,
       SearchPipePipe,
       LoginComponent,
-      RegisterComponent
+      RegisterComponent,
+      AddTeacherComponent,
+      FooterComponent
    ],
    imports: [
       BrowserModule,
@@ -41,7 +46,8 @@ import { RegisterComponent } from './register/register.component';
       HttpClientModule,
       NgbModule,
       FormsModule,
-      ReactiveFormsModule
+      ReactiveFormsModule,
+      Ng5SliderModule
    ],
    providers: [],
    bootstrap: [

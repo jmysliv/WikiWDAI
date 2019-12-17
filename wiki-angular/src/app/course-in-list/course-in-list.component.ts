@@ -33,6 +33,7 @@ export class CourseInListComponent implements OnInit {
       counter++;
       sum += element.rating;
     });
+    if (sum === 0 ) { return 0; }
     return Math.round((sum / counter) * 10) / 10;
   }
 

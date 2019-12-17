@@ -22,6 +22,10 @@ export const insertUser = (req, res) => {
  };
 
  export const userGetById = (req, res) => {
+    if(!mongoose.Types.ObjectId.isValid(req.params.userId)) {
+        res.status(400).send({message: "invalid id syntax"})
+        return;
+    }
     UserModel.findById(req.params.userId).then((result) => {
         res.status(200).send(result.getUnifiedUser()) ;
     });
@@ -29,7 +33,7 @@ export const insertUser = (req, res) => {
 
  export const userGet = (req, res) => {
     UserModel.find().then((result) => {
-        res.status(200).send(result.getUnifiedUser()) ;
+        res.status(200).send(result.map(x => x.getUnifiedUser())) ;
     });
  };
 

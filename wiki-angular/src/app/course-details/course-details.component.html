@@ -53,6 +53,7 @@
                         </option>
                     </ng-template>
                 </select>
+                <app-add-teacher [Admin]="checkIfAdmin()" [course]="course" [courseTeacher]="selectValue"></app-add-teacher>
         </div>
       </div>
         <!-- /.col-lg-3 -->
@@ -117,16 +118,17 @@
                 <ng-template ngFor let-comment [ngForOf]="selectCategory.comments">
                   <p>{{comment.content}}</p>
                   <p>Ocena: {{comment.rating}}</p>
-                  <small class="text-muted">Posted by {{comment.studentId}}</small>
+                  <small class="text-muted">Posted by {{getStudentName(comment.studentId)}}</small>
                   <hr>
               </ng-template>
-              <a  class="btn btn-success text-white" (click)="toggleChild2()">Oceń Nauczyciela!</a>
+              <a  *ngIf="loggedUser != null" class="btn btn-success text-white" (click)="toggleChild2()">Oceń Nauczyciela!</a>
               <app-add-comment [showMe]="showCommentForm" [course]="course" [courseTeacher]="selectValue" [commentCategory]="selectCategory"></app-add-comment>
             </div>
           </div>
       </div>
 </div>
 </div>
+<app-footer></app-footer>
 
   
 

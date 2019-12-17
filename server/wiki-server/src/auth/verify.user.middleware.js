@@ -4,8 +4,6 @@ import mongoose from 'mongoose'
 mongoose.set('useFindAndModify', false);
 
 export const isPasswordAndUserMatch = (req, res, next) => {
-    console.log(req.body);
-    
     UserModel.findOne({email: req.body.email}, (err, result) => {})
         .then((user)=>{
             if(!user){
@@ -30,7 +28,7 @@ export const isPasswordAndUserMatch = (req, res, next) => {
 };
 
 export const checkIfAdmin = (req, res, next) => {
-    
+
         if(req.jwt.admin === true){
             return next();
         } else{

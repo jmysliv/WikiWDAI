@@ -1,5 +1,6 @@
-.container{
-    border-bottom: 2px solid black;
+.lista{
+    border-top: 2px solid black;
+    
 }
 .row{
     padding: 30px;
@@ -11,4 +12,8 @@
 
 .zebra:nth-child(odd) {
     background-color: #c8c8c8;
+}
+
+.zebra{
+    margin: 10px;
 }

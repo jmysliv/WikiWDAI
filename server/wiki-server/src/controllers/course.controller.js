@@ -1,11 +1,4 @@
 import mongoose from 'mongoose'
-import {
-    createCourse,
-    findById,
-    findAll,
-    updateCourse,
-    deleteCourse
-} from '../models/course.model';
 import CourseModel from '../models/course.model'
 
 export const insertCourse = (req, res) => {

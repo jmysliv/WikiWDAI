@@ -6,12 +6,12 @@ var router = express.Router();
 
 
 //handling get, post and delete request
-router.get('/', [validJWTNeeded, checkIfAdmin, userGet]);
+router.get('/',  [userGet]);
 
 router.post('/', insertUser);
 
 //handling request with specified id(get, put, delete)
-router.get('/:userId', [validJWTNeeded, checkIfAdmin, userGetById]);
+router.get('/:userId', [userGetById]);
 
 router.put('/:userId', [validJWTNeeded, checkIfAdmin, userPut]);
 

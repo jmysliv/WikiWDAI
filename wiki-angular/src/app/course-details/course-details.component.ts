@@ -29,6 +29,7 @@ showCommentForm = false;
 loggedUser: UserToBeDisplayed;
 subscription: Subscription;
 courseSubscription: Subscription;
+users: UserToBeDisplayed[];
 constructor(private route: ActivatedRoute, private mockData: MockDataServiceService, private userService: UserService) {
 
 }
@@ -61,6 +62,9 @@ constructor(private route: ActivatedRoute, private mockData: MockDataServiceServ
       }
       this.update();
     });
+    this.userService.getUsers().subscribe(res => {
+      this.users = res;
+    });
   }
 
   update() {
@@ -82,6 +86,7 @@ constructor(private route: ActivatedRoute, private mockData: MockDataServiceServ
       counter++;
       sum += element.rating;
     });
+    if (sum === 0) {return 0; }
     return Math.round((sum / counter) * 10) / 10;
   }
 
@@ -96,6 +101,7 @@ constructor(private route: ActivatedRoute, private mockData: MockDataServiceServ
       });
     });
     }
+    if (sum === 0) {return 0; }
     return Math.round((sum / counter) * 10) / 10;
   }
 
@@ -108,6 +114,7 @@ constructor(private route: ActivatedRoute, private mockData: MockDataServiceServ
         sum += element.rating;
       });
     }
+    if (sum === 0) {return 0; }
     return Math.round((sum / counter) * 10) / 10;
   }
 
@@ -137,4 +144,19 @@ constructor(private route: ActivatedRoute, private mockData: MockDataServiceServ
   toggleChild2() {
     this.showCommentForm = !this.showCommentForm;
   }
+
+  checkIfAdmin() {
+    return this.userService.checkIfAdmin(this.loggedUser);
+  }
+
+  getStudentName(studentID) {
+    let name = 'computer';
+    if (this.users) {
+      this.users.forEach(element => {
+        if (element.id === studentID) {name = element.name; }
+      });
+    }
+    return name;
+  }
+
 }

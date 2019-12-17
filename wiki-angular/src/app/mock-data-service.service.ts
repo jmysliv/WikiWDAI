@@ -45,23 +45,21 @@ export class MockDataServiceService {
 
   }
 
-  deleteCourse(course: Course): Observable<{}> {
+  deleteCourse(course: Course) {
     const resp = this.httpClient.delete<Course>(`${this.REST_API_SERVER}/courses/${course.id}`, {headers: this.userService.setUpHeaders()});
     resp.subscribe(() =>
       this.getCourses().subscribe(res =>
         this.currentCourses.next(res)
     ));
-    return resp;
   }
 
-  addCourse(course: CourseToBeAdded): Observable<{}> {
+  addCourse(course: CourseToBeAdded) {
     const response = this.httpClient.post<CourseToBeAdded>
     (`${this.REST_API_SERVER}/courses`, course, {headers: this.userService.setUpHeaders()});
     response.subscribe( res => {
-       this.getCourses().subscribe(resp => {
-        this.currentCourses.next(resp);
+        this.getCourses().subscribe(resp => {
+          this.currentCourses.next(resp);
         });
       });
-    return response;
   }
 }

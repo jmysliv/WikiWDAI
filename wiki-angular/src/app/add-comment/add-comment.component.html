@@ -1,9 +1,12 @@
-<div class="container" *ngIf="showMe">
+<div class="container" *ngIf="showMe && checkIfCommentedAlready() === false">
     <ngb-rating [(rate)]="currentRate"></ngb-rating>
     <br><br>
-    <textarea ref-textarea [(ngModel)]="textValue" rows="4" cols="50"></textarea>
+    <textarea ref-textarea [(ngModel)]="textValue" rows="4" cols="50" placeholder="Napisz Komentarz"></textarea>
     <hr>
     <br>
     <a  class="btn btn-secondary text-white" (click)="addComment()">Zapisz</a>
+</div>
+<div class="container" *ngIf="showMe && checkIfCommentedAlready()">
+    <a  class="btn btn-secondary text-white" (click)="deleteComment()">Usuń swój komentarz</a>
 </div>
 

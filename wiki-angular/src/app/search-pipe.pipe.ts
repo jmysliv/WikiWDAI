@@ -51,7 +51,10 @@ export class SearchPipePipe implements PipeTransform {
           counter++;
           sum += element.rating;
         });
-        const rate =  Math.round((sum / counter) * 10) / 10;
+        let rate;
+        if (sum === 0 ) {
+          rate = 0;
+        } else { rate =  Math.round((sum / counter) * 10) / 10; }
         return (rate <= rating.maxvalue && rate >= rating.minvalue);
       });
   }
