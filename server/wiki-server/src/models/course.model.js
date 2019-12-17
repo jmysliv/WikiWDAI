@@ -1,30 +1,79 @@
 import mongoose from 'mongoose';
 
 const courseSchema = new mongoose.Schema({
-    name: String,
-    ects: Number,
-    semester: Number,
-    maxStudents: Number,
+    name:{
+        type: String,
+        required: true
+      },
+    ects: {
+        type: Number,
+        min: 0,
+        max: 15,
+        required: true
+      },
+    semester: {
+        type: Number,
+        min: 0,
+        max: 10,
+        required: true
+      },
+    maxStudents: {
+        type: Number,
+        min: 0,
+        required: true
+      },
     courseForm: {
         type: String,
-        enum: ['Lecture', 'Exercise', 'Lab', 'Project'],
+        enum: ['Lecture', 'Excercise', 'Lab', 'Project'],
         default: 'Lecture'
     },
     ratings: [{
-        rating: Number,
+        rating: {
+            type: Number,
+            min: 0,
+            max: 5,
+          },
         studentId: String,
     }],
     description: String,
-    image: String,
+    image:{
+        type: String,
+        validate: {
+            validator: function(v){
+                return /https?:[\/|.|\w|\s|-]*\.(?:jpg|gif|png).*/g.test(v)
+            }
+        } 
+      },
     courseTeachers: [{
         teacher: {
             id: String,
             name: String,
-            image: String,
+            image: {
+                type: String,
+                validate: {
+                    validator: function(v){
+                        return /https?:[\/|.|\w|\s|-]*\.(?:jpg|gif|png).*/g.test(v)
+                    }
+                } 
+              },
             teacherCard: {
                 phone: Number,
-                email: String,
-                homePage: String,
+                email: {
+                    type: String,
+                    validate: {
+                        validator: function(v){
+                            return /\S+@\S+\.\S+/.test(v)
+                        }
+                    } 
+                  },
+                homePage: {
+                    type: String,
+                    validate: {
+                        validator: function(v){
+                            return /https?:[\/|.|\w|\s|-]*\.*/g.test(v)
+                        }
+                    } 
+                },
             },
             degree: String,
         },
@@ -32,7 +81,11 @@ const courseSchema = new mongoose.Schema({
             category: String,
             comments: [{
                 studentId: String,
-                rating: Number,
+                rating: {
+                    type: Number,
+                    min: 0,
+                    max: 5,
+                  },
                 content: String,
             }],
         }],

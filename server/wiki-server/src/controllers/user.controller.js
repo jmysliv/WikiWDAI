@@ -27,7 +27,13 @@ export const insertUser = (req, res) => {
         return;
     }
     UserModel.findById(req.params.userId).then((result) => {
-        res.status(200).send(result.getUnifiedUser()) ;
+        if (result) {
+            res.status(200).send(result.getUnifiedUser()) ;
+        }
+        else {
+            res.status(404).send({message: 'not found'})
+        }
+        
     });
  };
 

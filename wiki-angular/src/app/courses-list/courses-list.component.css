@@ -13,7 +13,3 @@
 .zebra:nth-child(odd) {
     background-color: #c8c8c8;
 }
-
-.zebra{
-    margin: 10px;
-}

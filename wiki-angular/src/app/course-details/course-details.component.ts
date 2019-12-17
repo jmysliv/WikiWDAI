@@ -136,6 +136,11 @@ constructor(private route: ActivatedRoute, private mockData: MockDataServiceServ
   unEnroll() {
     this.course.enrolledStudents = this.course.enrolledStudents.filter(x => x !== this.loggedUser.id);
     this.course.ratings = this.course.ratings.filter(x => x.studentId !== this.loggedUser.id);
+    this.course.courseTeachers.forEach(element => {
+      element.commentCategories.forEach(category => {
+        category.comments = category.comments.filter(x => x.studentId !== this.loggedUser.id );
+      });
+    });
     this.mockData.patchCourse(this.course, this.course.id);
     this.showVar = false;
     this.enrollOnCourse = false;

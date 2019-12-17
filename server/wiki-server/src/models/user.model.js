@@ -1,8 +1,23 @@
 import mongoose from 'mongoose'
 const userSchema = new mongoose.Schema({
-    name: String,
-    email: String,
-    password: String,
+    name: {
+      type: String,
+      required: true
+    },
+    email: {
+      type: String,
+      required: true,
+      unique: true,
+      validate: {
+        validator: function(v){
+            return /\S+@\S+\.\S+/.test(v)
+        }
+    } 
+    },
+    password: {
+      type: String,
+      required: true
+    },
     admin: Boolean,
   });
 

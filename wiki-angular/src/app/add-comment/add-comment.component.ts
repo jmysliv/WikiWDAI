@@ -49,6 +49,14 @@ export class AddCommentComponent implements OnInit {
     return flag;
   }
 
+  checkIfEnrolled() {
+    let flag = false;
+    this.course.enrolledStudents.forEach(element => {
+      if (element === this.loggedUser.id) {flag = true; }
+    });
+    return flag;
+  }
+
   deleteComment() {
     this.commentCategory.comments = this.commentCategory.comments.filter(x => x.studentId !== this.loggedUser.id );
     this.mockData.patchCourse(this.course, this.course.id);

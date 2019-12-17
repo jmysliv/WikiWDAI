@@ -1,4 +1,4 @@
-<div class="container" *ngIf="showMe && checkIfCommentedAlready() === false">
+<div class="container" *ngIf="showMe && checkIfCommentedAlready() === false  && checkIfEnrolled()">
     <ngb-rating [(rate)]="currentRate"></ngb-rating>
     <br><br>
     <textarea ref-textarea [(ngModel)]="textValue" rows="4" cols="50" placeholder="Napisz Komentarz"></textarea>
@@ -6,7 +6,10 @@
     <br>
     <a  class="btn btn-secondary text-white" (click)="addComment()">Zapisz</a>
 </div>
-<div class="container" *ngIf="showMe && checkIfCommentedAlready()">
+<div class="container" *ngIf="showMe && checkIfCommentedAlready() && checkIfEnrolled()">
     <a  class="btn btn-secondary text-white" (click)="deleteComment()">Usuń swój komentarz</a>
+</div>
+<div class="container" *ngIf="showMe && checkIfEnrolled()===false">
+    <p>Zapisz się na kurs, by móc komentować!</p>
 </div>
 
