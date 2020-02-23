@@ -11,9 +11,9 @@ import * as uuid from 'uuid';
 export class RegisterComponent implements OnInit {
   @Output() displayLogin = new EventEmitter<boolean> ();
   signUpForm: FormGroup;
-  private formSignUpAttempt: boolean;
+  formSignUpAttempt: boolean;
   private emailAlreadyExist: boolean;
-  private registrationComplete: boolean;
+  registrationComplete: boolean;
   invalidData = false;
   users: Array<User>;
   constructor(private fb: FormBuilder, private userService: UserService) { }

@@ -1,4 +1,3 @@
-import { CourseFilter } from './search-pipe.pipe';
 import { Course } from './course';
 import { Pipe, PipeTransform } from '@angular/core';
 

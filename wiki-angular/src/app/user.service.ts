@@ -26,7 +26,7 @@ export interface LoginResponse {accessToken: string; refreshToken: string; }
 })
 export class UserService {
   private loggedIn: BehaviorSubject<UserToBeDisplayed> = new BehaviorSubject<UserToBeDisplayed>(null);
-  REST_API_SERVER = 'http://localhost:3000';
+  REST_API_SERVER = 'http://localhost:4000';
   constructor(private httpClient: HttpClient, private router: Router) {
     const token = localStorage.getItem('currentToken');
     if (token) {

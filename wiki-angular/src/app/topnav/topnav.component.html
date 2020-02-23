@@ -38,8 +38,8 @@
                 <button type="button" id="dropdownMenu1" data-toggle="dropdown" class="btn btn-outline-secondary dropdown-toggle">Login <span class="caret"></span></button>
                 <ul class="dropdown-menu dropdown-menu-right mt-2">
                   <li class="px-3 py-2">
-                    <app-login *ngIf="displayLogin" (displayLogin) = "changeDisplay($event)"></app-login>
-                    <app-register *ngIf="displayLogin === false" (displayLogin) = "changeDisplay($event)"></app-register>
+                    <app-login *ngIf="displayLogin" (displayLogin) = "changeDisplay()"></app-login>
+                    <app-register *ngIf="displayLogin === false" (displayLogin) = "changeDisplay()"></app-register>
                   </li>
                 </ul>
             </li>

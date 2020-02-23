@@ -13,7 +13,7 @@ export class LoginComponent implements OnInit {
   @Output() displayLogin = new EventEmitter<boolean> ();
 
   form: FormGroup;
-  private formSubmitAttempt: boolean;
+  formSubmitAttempt: boolean;
   invalidData = false;
   // users: Array<User>;
   constructor(  private fb: FormBuilder, private userService: UserService) { }

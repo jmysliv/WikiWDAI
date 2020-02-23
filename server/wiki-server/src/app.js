@@ -31,7 +31,7 @@ app.use('/users', userRouter);
 app.use('/auth', authRouter);
 app.use('/me', meRouter);
 
-app.listen(3000, 'localhost', (e)=>{
+app.listen(4000, 'localhost', (e)=>{
     console.log('running');
     
 });
