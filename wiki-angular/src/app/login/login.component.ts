@@ -43,11 +43,11 @@ export class LoginComponent implements OnInit {
     );
   }
 
-  onSubmit() {
+  async onSubmit() {
     if (this.form.invalid) { this.formSubmitAttempt = true; return; }
-
-    this.userService.login(this.form.value.email, this.form.value.password);
-    if ( this.userService.isLoggedIn === null) { this.formSubmitAttempt = true; this.invalidData = true; }
+    if (await this.userService.login(this.form.value.email, this.form.value.password)) {
+      this.formSubmitAttempt = true; this.invalidData = true;
+    }
 
   }
 

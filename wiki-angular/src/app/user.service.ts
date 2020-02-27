@@ -72,7 +72,7 @@ export class UserService {
     return this.loggedIn.asObservable();
   }
 
-  login(login, password) {
+  async login(login, password) {
     let token;
     return this.httpClient.post<LoginResponse>(`${this.REST_API_SERVER}/auth`,  {email: login,
       password}, { headers: this.setUpHeaders()}).subscribe(res => {
