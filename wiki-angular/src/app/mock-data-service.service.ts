@@ -1,3 +1,4 @@
+import { async } from '@angular/core/testing';
 import { UserService } from './user.service';
 import { RatingValues } from './ratings';
 import { Course, CourseToBeAdded } from './course';
@@ -33,13 +34,11 @@ export class MockDataServiceService {
   patchCourse( itemToAdd, id: string) {
     this.httpClient.put<Course>(`${this.REST_API_SERVER}/courses/${id}`, itemToAdd, { headers: this.userService.setUpHeaders()}).subscribe(
       res => {
-        console.log('received ok response from patch request');
         this.getCourses().subscribe(resp => {
           this.currentCourses.next(resp);
           });
       },
       error => {
-        console.error('There was an error during the request');
         console.log(error);
       });
 
@@ -61,5 +60,14 @@ export class MockDataServiceService {
           this.currentCourses.next(resp);
         });
       });
+  }
+
+  update() {
+    return new Promise((resolve, reject) => {
+      this.getCourses().subscribe(res => {
+        this.currentCourses.next(res);
+        resolve();
+    });
+    });
   }
 }

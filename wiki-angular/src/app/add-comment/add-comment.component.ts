@@ -57,22 +57,26 @@ export class AddCommentComponent implements OnInit {
     return flag;
   }
 
-  deleteComment() {
-    this.commentCategory.comments = this.commentCategory.comments.filter(x => x.studentId !== this.loggedUser.id );
-    this.mockData.patchCourse(this.course, this.course.id);
-    this.currentRate = 2;
-    this.textValue = '';
-    this.showMe = false;
+  async deleteComment() {
+    this.mockData.update().then(() => {
+      this.commentCategory.comments = this.commentCategory.comments.filter(x => x.studentId !== this.loggedUser.id );
+      this.mockData.patchCourse(this.course, this.course.id);
+      this.currentRate = 2;
+      this.textValue = '';
+      this.showMe = false;
+    });
   }
 
-  addComment() {
+  async addComment() {
     const comment = {
       studentId: this.loggedUser.id,
       rating: this.currentRate,
       content: this.textValue
     };
-    this.commentCategory.comments.push(comment);
-    this.mockData.patchCourse(this.course, this.course.id);
-    this.showMe = false;
+    this.mockData.update().then(() => {
+      this.commentCategory.comments.push(comment);
+      this.mockData.patchCourse(this.course, this.course.id);
+      this.showMe = false;
+    });
   }
 }

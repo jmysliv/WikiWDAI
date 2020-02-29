@@ -122,28 +122,32 @@ constructor(private route: ActivatedRoute, private mockData: MockDataServiceServ
     this.selectCategory = this.selectValue.commentCategories[0];
   }
 
-  enroll() {
-    if (this.course.enrolledStudents.length === this.course.maxStudents) {
-      this.noPlaceInCourse = true;
-      return;
-    }
-    this.course.enrolledStudents.push(this.loggedUser.id);
-    this.mockData.patchCourse(this.course, this.course.id);
-    this.showVar = true;
-    this.enrollOnCourse = true;
+  async enroll() {
+    this.mockData.update().then(() => {
+      if (this.course.enrolledStudents.length === this.course.maxStudents) {
+         this.noPlaceInCourse = true;
+         return;
+      }
+      this.course.enrolledStudents.push(this.loggedUser.id);
+      this.mockData.patchCourse(this.course, this.course.id);
+      this.showVar = true;
+      this.enrollOnCourse = true;
+    });
   }
 
-  unEnroll() {
-    this.course.enrolledStudents = this.course.enrolledStudents.filter(x => x !== this.loggedUser.id);
-    this.course.ratings = this.course.ratings.filter(x => x.studentId !== this.loggedUser.id);
-    this.course.courseTeachers.forEach(element => {
-      element.commentCategories.forEach(category => {
-        category.comments = category.comments.filter(x => x.studentId !== this.loggedUser.id );
-      });
+  async unEnroll() {
+    this.mockData.update().then(() => {
+        this.course.enrolledStudents = this.course.enrolledStudents.filter(x => x !== this.loggedUser.id);
+        this.course.ratings = this.course.ratings.filter(x => x.studentId !== this.loggedUser.id);
+        this.course.courseTeachers.forEach(element => {
+          element.commentCategories.forEach(category => {
+            category.comments = category.comments.filter(x => x.studentId !== this.loggedUser.id );
+          });
+        });
+        this.mockData.patchCourse(this.course, this.course.id);
+        this.showVar = false;
+        this.enrollOnCourse = false;
     });
-    this.mockData.patchCourse(this.course, this.course.id);
-    this.showVar = false;
-    this.enrollOnCourse = false;
   }
 
   toggleChild2() {

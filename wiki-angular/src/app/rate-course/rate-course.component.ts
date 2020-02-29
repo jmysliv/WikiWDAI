@@ -42,9 +42,11 @@ export class RateCourseComponent implements OnInit {
       rating: this.currentRate,
       studentId: this.loggedUser.id
     };
-    this.course.ratings.push(rating);
-    this.mockData.patchCourse(this.course, this.course.id);
-    this.showMePartially = false;
+    this.mockData.update().then(() => {
+      this.course.ratings.push(rating);
+      this.mockData.patchCourse(this.course, this.course.id);
+      this.showMePartially = false;
+    });
   }
 
 }
