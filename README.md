@@ -8,6 +8,6 @@ Jest to aplikacja webowa, pozwalająca na zapisywanie się na kursy, a także oc
 + Angular 8
 + HTML
 + CSS
-+ Node Js
-+ Mongo DB
-+ Express JS
++ Node.js
++ MongoDB
++ Express
