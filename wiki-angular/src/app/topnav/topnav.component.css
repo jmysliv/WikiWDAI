@@ -12,3 +12,13 @@
 .nav-item{
     margin-right: 20px;
 }
+
+li{
+    margin: 10px;
+}
+
+@media (max-width: 600px) {
+    .dropdown-add{
+        min-width: min-content;
+    }
+  }

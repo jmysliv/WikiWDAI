@@ -5,3 +5,7 @@
 .btn{
     cursor: pointer;
 }
+
+.commentArea{
+    width: 100%;
+}

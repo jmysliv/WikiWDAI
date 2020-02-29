@@ -1,7 +1,7 @@
 <div class="container" *ngIf="showMe && checkIfCommentedAlready() === false  && checkIfEnrolled()">
     <ngb-rating [(rate)]="currentRate"></ngb-rating>
     <br><br>
-    <textarea ref-textarea [(ngModel)]="textValue" rows="4" cols="50" placeholder="Napisz Komentarz"></textarea>
+    <textarea class="commentArea" ref-textarea [(ngModel)]="textValue" rows="4" cols="50" placeholder="Napisz Komentarz"></textarea>
     <hr>
     <br>
     <a  class="btn btn-secondary text-white" (click)="addComment()">Zapisz</a>

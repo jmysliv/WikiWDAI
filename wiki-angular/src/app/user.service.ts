@@ -26,7 +26,7 @@ export interface LoginResponse {accessToken: string; refreshToken: string; }
 })
 export class UserService {
   private loggedIn: BehaviorSubject<UserToBeDisplayed> = new BehaviorSubject<UserToBeDisplayed>(null);
-  REST_API_SERVER = 'http://46.101.198.229:4000';
+  REST_API_SERVER = 'https://studentswiki.pl:4000';
   constructor(private httpClient: HttpClient, private router: Router) {
     const token = localStorage.getItem('currentToken');
     if (token) {
